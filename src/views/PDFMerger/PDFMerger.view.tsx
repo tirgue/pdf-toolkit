@@ -31,11 +31,15 @@ export function PDFMergerView() {
     };
 
     const handleMerge = async () => {
-        const [pdfA, pdfB, pdfList] = pdfs.map(({ document }) => document);
+        const [pdfA, pdfB, ...pdfList] = pdfs.map(({ document }) => document);
+        console.log(
+            "🚀 ~ file: PDFMerger.view.tsx:35 ~ handleMerge ~ pdfList:",
+            pdfList
+        );
 
         if (!pdfB) return;
 
-        const mergedPDF = await PDFService.merge(pdfA, pdfB, pdfList);
+        const mergedPDF = await PDFService.merge(pdfA, pdfB, ...pdfList);
 
         const mergePDFBuffer = await mergedPDF.save();
         const pdfBlob = new Blob([mergePDFBuffer], { type: "application/pdf" });
