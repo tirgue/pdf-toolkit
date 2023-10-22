@@ -1,12 +1,8 @@
-import { List } from "@mui/material";
-import {
-    DragDropContext,
-    DropResult,
-    Droppable,
-    OnDragEndResponder,
-} from "react-beautiful-dnd";
+import { Box, List } from "@mui/material";
+import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 import { PDFAssociation } from "../../interfaces";
 import { PDFCard } from "../PDFCard";
+import "./PDFSelector.scss";
 
 export interface PDFSelectorProps {
     pdfs: PDFAssociation[];
@@ -33,21 +29,28 @@ export function PDFSelector({
     };
 
     return (
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="pdf-draoppable">
-                {(provided) => (
-                    <List ref={provided.innerRef} {...provided.droppableProps}>
-                        {pdfs.map(({ name }, index) => (
-                            <PDFCard
-                                name={name}
-                                index={index}
-                                onRemovePDF={handleRemovePDF}
-                            />
-                        ))}
-                        {provided.placeholder}
-                    </List>
-                )}
-            </Droppable>
-        </DragDropContext>
+        <Box className="pdf-selector">
+            <DragDropContext onDragEnd={handleOnDragEnd}>
+                <Droppable droppableId="pdf-droppable">
+                    {(provided) => (
+                        <List
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            {pdfs.map(({ id, name }, index) => (
+                                <PDFCard
+                                    id={id}
+                                    key={id}
+                                    name={name}
+                                    index={index}
+                                    onRemovePDF={handleRemovePDF}
+                                />
+                            ))}
+                            {provided.placeholder}
+                        </List>
+                    )}
+                </Droppable>
+            </DragDropContext>
+        </Box>
     );
 }

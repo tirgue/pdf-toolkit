@@ -15,14 +15,15 @@ import {
 import "./PDFCard.scss";
 
 export interface PDFCardProps {
+    id: string;
     index: number;
     name: string;
     onRemovePDF: (index: number) => void;
 }
 
-export function PDFCard({ name, index, onRemovePDF }: PDFCardProps) {
+export function PDFCard({ id, name, index, onRemovePDF }: PDFCardProps) {
     return (
-        <Draggable draggableId={name} index={index}>
+        <Draggable draggableId={id} index={index}>
             {(
                 provided: DraggableProvided,
                 snapshot: DraggableStateSnapshot
@@ -43,6 +44,7 @@ export function PDFCard({ name, index, onRemovePDF }: PDFCardProps) {
                         primaryTypographyProps={{
                             overflow: "hidden",
                             textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
                         }}
                         className="pdf-card-text"
                     />

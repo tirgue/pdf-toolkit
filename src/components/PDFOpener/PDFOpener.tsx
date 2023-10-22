@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
-import { PDFDocument } from "pdf-lib";
 import { ChangeEvent } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { PDFAssociation } from "../../interfaces";
 import { PDFService } from "../../services";
 
@@ -16,6 +16,7 @@ export function PDFOpener({ onPDFOpen }: PDFOpenerProps) {
         const promises = Array.from(files).map<Promise<PDFAssociation>>(
             async (file) => {
                 return {
+                    id: uuidv4(),
                     name: file.name,
                     document: await PDFService.fileToPDF(file),
                 };
@@ -32,6 +33,7 @@ export function PDFOpener({ onPDFOpen }: PDFOpenerProps) {
                 type="file"
                 hidden
                 onChange={handlePDFOpen}
+                value={""}
                 accept="application/pdf"
                 multiple
             />

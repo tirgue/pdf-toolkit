@@ -1,0 +1,16 @@
+.pdf-merger-view {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-height: calc(100% - 150px);
+    padding: 15px;
+    width: 430px;
+}
+
+.pdf-merger-commands {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}

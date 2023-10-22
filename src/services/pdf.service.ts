@@ -9,10 +9,14 @@ export class PDFService {
     static async merge(
         pdfA: PDFDocument,
         pdfB: PDFDocument,
-        ...pdfList: PDFDocument[]
+        ...pdfList: (PDFDocument | undefined)[]
     ): Promise<PDFDocument> {
+        const pdfListClean = pdfList.filter(
+            (pdf: PDFDocument | undefined): pdf is PDFDocument => !!pdf
+        );
+
         const mergedPdf = await PDFDocument.create();
-        for (const pdf of [pdfA, pdfB, ...pdfList]) {
+        for (const pdf of [pdfA, pdfB, ...pdfListClean]) {
             const copiedPages = await mergedPdf.copyPages(
                 pdf,
                 pdf.getPageIndices()
