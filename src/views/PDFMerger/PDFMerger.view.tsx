@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { PDFOpener } from "../../components/PDFOpener";
 import { PDFSelector } from "../../components/PDFSelector";
 import { PDFAssociation } from "../../interfaces";
-import { PDFService } from "../../services";
+import { InstallService, PDFService } from "../../services";
 import { moveArrayElement, removeArrayElement } from "../../utils";
 import "./PDFMerger.view.scss";
 
@@ -51,6 +51,12 @@ export function PDFMergerView() {
                     disabled={pdfs.length < 2}
                 >
                     Merge
+                </Button>
+                <Button
+                    variant="contained"
+                    onClick={InstallService.triggerInstall}
+                >
+                    Install
                 </Button>
             </Box>
             <PDFSelector
