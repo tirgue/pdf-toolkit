@@ -9,13 +9,7 @@ import "./PDFMerger.view.scss";
 
 export function PDFMergerView() {
     const [pdfs, setPDFs] = useState<PDFAssociation[]>([]);
-
-    useEffect(() => {
-        console.log(
-            "🚀 ~ file: PDFMerger.view.tsx:13 ~ useEffect ~ pdfs:",
-            pdfs
-        );
-    }, [pdfs]);
+    const [mergeReady, setMergeReady] = useState<boolean>(true);
 
     const handlePDFOpen = (pdfList: PDFAssociation[]) => {
         setPDFs((pdfs) => [...pdfs, ...pdfList]);
@@ -25,6 +19,11 @@ export function PDFMergerView() {
         setPDFs((pdfs) => {
             return moveArrayElement(fromIndex, toIndex, pdfs);
         });
+        setMergeReady(true);
+    };
+
+    const handleDragStart = () => {
+        setMergeReady(false);
     };
 
     const handleRemovePDF = (index: number) => {
@@ -51,13 +50,14 @@ export function PDFMergerView() {
                 <Button
                     variant="contained"
                     onClick={handleMerge}
-                    disabled={pdfs.length < 2}
+                    disabled={pdfs.length < 2 || !mergeReady}
                 >
                     Merge
                 </Button>
             </Box>
             <PDFSelector
                 onDragEnd={handleDragEnd}
+                onDragStart={handleDragStart}
                 onRemovePDF={handleRemovePDF}
                 pdfs={pdfs}
             />

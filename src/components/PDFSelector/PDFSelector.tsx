@@ -8,12 +8,14 @@ export interface PDFSelectorProps {
     pdfs: PDFAssociation[];
     onRemovePDF: (index: number) => void;
     onDragEnd: (fromIndex: number, toIndex: number) => void;
+    onDragStart: () => void;
 }
 
 export function PDFSelector({
     pdfs,
     onRemovePDF,
     onDragEnd,
+    onDragStart,
 }: PDFSelectorProps) {
     const handleRemovePDF = (index: number) => {
         onRemovePDF(index);
@@ -30,7 +32,10 @@ export function PDFSelector({
 
     return (
         <Box className="pdf-selector">
-            <DragDropContext onDragEnd={handleOnDragEnd}>
+            <DragDropContext
+                onDragEnd={handleOnDragEnd}
+                onDragStart={onDragStart}
+            >
                 <Droppable droppableId="pdf-droppable">
                     {(provided) => (
                         <List
