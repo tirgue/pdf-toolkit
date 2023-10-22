@@ -1,0 +1,10 @@
+.pdf-card {
+    background-color: #fff8f8;
+    border-radius: 5px;
+    margin: 1px;
+    user-select: none;
+}
+
+.pdf-card.is-dragging {
+    background-color: #cec8c8;
+}
