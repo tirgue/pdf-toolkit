@@ -1,5 +1,12 @@
+import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import {
+    IconButton,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+} from "@mui/material";
+import { MouseEventHandler } from "react";
 import {
     Draggable,
     DraggableProvided,
@@ -10,9 +17,10 @@ import "./PDFCard.scss";
 export interface PDFCardProps {
     index: number;
     name: string;
+    onRemovePDF: (index: number) => void;
 }
 
-export function PDFCard({ name, index }: PDFCardProps) {
+export function PDFCard({ name, index, onRemovePDF }: PDFCardProps) {
     return (
         <Draggable draggableId={name} index={index}>
             {(
@@ -27,10 +35,20 @@ export function PDFCard({ name, index }: PDFCardProps) {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <ListItemIcon sx={{ color: "#f40f02" }}>
-                        <PictureAsPdfIcon />
+                    <ListItemIcon>
+                        <PictureAsPdfIcon className="pdf-card-pdf-icon" />
                     </ListItemIcon>
-                    <ListItemText primary={name} />
+                    <ListItemText
+                        primary={name}
+                        primaryTypographyProps={{
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                        }}
+                        className="pdf-card-text"
+                    />
+                    <IconButton onClick={() => onRemovePDF(index)}>
+                        <CancelRoundedIcon className="pdf-card-delete-icon" />
+                    </IconButton>
                 </ListItem>
             )}
         </Draggable>

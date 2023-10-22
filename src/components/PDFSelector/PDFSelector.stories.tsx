@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { PDFDocument } from "pdf-lib";
 import { PDFSelector } from "./PDFSelector";
 
 const meta = {
@@ -17,17 +18,18 @@ export const Default: Story = {
     args: {
         pdfs: [
             {
-                index: 0,
                 name: "mypdf0.pdf",
+                document: {} as PDFDocument,
             },
             {
-                index: 1,
-                name: "mypdfverylongpdfname1.pdf",
+                name: "mypdfveryveryveryveryverylongpdfname1.pdf",
+                document: {} as PDFDocument,
             },
             {
-                index: 2,
                 name: "mypdf2.pdf",
+                document: {} as PDFDocument,
             },
         ],
+        onRemovePDF: (index) => console.log("Removing", index),
     },
 };

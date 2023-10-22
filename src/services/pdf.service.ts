@@ -1,6 +1,6 @@
 import { PDFDocument } from "pdf-lib";
 
-class PDFService {
+export class PDFService {
     static async fileToPDF(file: File): Promise<PDFDocument> {
         const fileBuffer = await file.arrayBuffer();
         return PDFDocument.load(fileBuffer);
