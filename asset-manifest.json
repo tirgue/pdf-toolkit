@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/pdf-toolkit/static/css/main.98cb3ce6.css",
-    "main.js": "/pdf-toolkit/static/js/main.92829bb5.js",
+    "main.css": "/pdf-toolkit/static/css/main.1e4e663c.css",
+    "main.js": "/pdf-toolkit/static/js/main.bbfde792.js",
     "index.html": "/pdf-toolkit/index.html",
-    "main.98cb3ce6.css.map": "/pdf-toolkit/static/css/main.98cb3ce6.css.map",
-    "main.92829bb5.js.map": "/pdf-toolkit/static/js/main.92829bb5.js.map"
+    "main.1e4e663c.css.map": "/pdf-toolkit/static/css/main.1e4e663c.css.map",
+    "main.bbfde792.js.map": "/pdf-toolkit/static/js/main.bbfde792.js.map"
   },
   "entrypoints": [
-    "static/css/main.98cb3ce6.css",
-    "static/js/main.92829bb5.js"
+    "static/css/main.1e4e663c.css",
+    "static/js/main.bbfde792.js"
   ]
 }
