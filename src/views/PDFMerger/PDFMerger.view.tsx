@@ -1,14 +1,16 @@
 import { Box, Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PDFOpener } from "../../components/PDFOpener";
 import { PDFSelector } from "../../components/PDFSelector";
+import { useInstallPrompt } from "../../hooks";
 import { PDFAssociation } from "../../interfaces";
-import { InstallService, PDFService } from "../../services";
+import { PDFService } from "../../services";
 import { moveArrayElement, removeArrayElement } from "../../utils";
 import "./PDFMerger.view.scss";
 
 export function PDFMergerView() {
     const [pdfs, setPDFs] = useState<PDFAssociation[]>([]);
+    const [canInstall, triggerInstall] = useInstallPrompt();
 
     const handlePDFOpen = (pdfList: PDFAssociation[]) => {
         setPDFs((pdfs) => [...pdfs, ...pdfList]);
@@ -26,10 +28,6 @@ export function PDFMergerView() {
 
     const handleMerge = async () => {
         const [pdfA, pdfB, ...pdfList] = pdfs.map(({ document }) => document);
-        console.log(
-            "🚀 ~ file: PDFMerger.view.tsx:35 ~ handleMerge ~ pdfList:",
-            pdfList
-        );
 
         if (!pdfB) return;
 
@@ -54,7 +52,8 @@ export function PDFMergerView() {
                 </Button>
                 <Button
                     variant="contained"
-                    onClick={InstallService.triggerInstall}
+                    onClick={triggerInstall}
+                    sx={{ display: canInstall ? "initial" : "none" }}
                 >
                     Install
                 </Button>
